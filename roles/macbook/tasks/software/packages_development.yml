@@ -1,23 +1,27 @@
 - name: dev env setup | install development packages
   tags: workstation 
-  package:
-    state: latest
-    name:
-      - zsh
-      - stow
-      - neovim
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  become: false
+  with_items
+    - zsh
+    - stow
+    - neovim
+    - tree
 
 - name: dev env setup | install cask 
   community.general.homebrew_cask:
     name: "{{ item }}"
     state: present
-    loop:
-      - nikitabobko/tap/aerospace
-      - ghostty
-      - obsidian
-      - mockoon
-      - intellij-idea
-      - dbeaver-community
+  become: false
+  with_items:
+    - nikitabobko/tap/aerospace
+    - ghostty
+#    - obsidian
+#    - mockoon
+#    - intellij-idea
+#    - dbeaver-community
 
 - name: dev env setup | download dotfiles
   tags: workstation

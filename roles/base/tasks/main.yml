@@ -3,11 +3,6 @@
   tags: always
 
 - block:
-  # User configs
-  - import_tasks: users/pandas.yml
-
-  # Setup repositories
-    
   # Install software
   - import_tasks: software/packages_utilities.yml
 
