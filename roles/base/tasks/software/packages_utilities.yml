@@ -1,0 +1,10 @@
+- name: system setup | utilities | install utility packages
+  tags: base 
+  package:
+    state: latest
+    name:
+      - git
+      - curl
+      - vim
+      - htop
+      - tmux

@@ -1,0 +1,40 @@
+- name: dev env setup | install development packages
+  tags: workstation 
+  package:
+    state: latest
+    name:
+      - zsh
+      - stow
+      - neovim
+
+- name: dev env setup | download dotfiles
+  tags: workstation
+  git:
+    repo: "https://github.com/artw23/dotfiles.git"
+    dest: /home/pandas/dotfiles
+    update: yes
+  become: false
+
+- name: dev env setup | stow configs
+  tags: workstation
+  loop:
+    - zsh
+    - nvim
+    - tmux
+    - firefox
+  loop_control:
+    loop_var: config
+  command: stow -v -t /home/pandas {{ config }}
+  args:
+    chdir: /home/pandas/dotfiles
+  become: false
+
+- name: dev env setup | Download  Oh My Zsh
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install_ohmyzsh.sh
+
+- name: dev env setup | Setting up Oh My Zsh
+  command: sh /tmp/install_ohmyzsh.sh --unattended
+  register: ohmyzsh_result
+  failed_when: "'FAILED' in ohmyzsh_result.stderr"

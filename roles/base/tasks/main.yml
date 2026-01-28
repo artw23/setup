@@ -1,0 +1,15 @@
+# Load distro-specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
+- block:
+  # User configs
+  - import_tasks: users/pandas.yml
+
+  # Setup repositories
+    
+  # Install software
+  - import_tasks: software/packages_utilities.yml
+
+  rescue:
+    - set_fact: task_failed=true

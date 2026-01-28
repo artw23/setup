@@ -1,0 +1,10 @@
+- name: users | pandas | create .ssh directory
+  tags: pandas
+  file:
+    path: "{{ item.dir }}"
+    state: directory
+    owner: pandas
+    group: pandas
+    mode: 0700
+  with_items:
+    - { dir: '/home/pandas/.ssh' }
