@@ -4,7 +4,7 @@
     name: "{{ item }}"
     state: present
   become: false
-  with_items
+  with_items:
     - zsh
     - stow
     - neovim
@@ -18,10 +18,10 @@
   with_items:
     - nikitabobko/tap/aerospace
     - ghostty
-#    - obsidian
-#    - mockoon
-#    - intellij-idea
-#    - dbeaver-community
+#   - obsidian
+#   - mockoon
+#   - intellij-idea
+#   - dbeaver-community
 
 - name: dev env setup | download dotfiles
   tags: workstation
