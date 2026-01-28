@@ -8,19 +8,19 @@
       dnf: 
         update_cache: yes
       changed_when: False
-      when: ansible_distribution in ["Fedora"]
+      when: aansible_facts['distribution'] in ["Fedora"]
 
     - name: pre-run | update package cache (Ubuntu/Debian)
       apt:
         update_cache: yes
       changed_when: False
-      when: ansible_distribution in ["Ubuntu","Debian"]
+      when: ansible_facts['distribution'] in ["Ubuntu","Debian"]
 
     - name: pre-run | update package cache (Arch)
       pacman:
          update_cache: yes
       changed_when: False
-      when: ansible_distribution == "Archlinux"
+      when: ansible_facts['distribution'] == "Archlinux"
 
 - hosts: all
   tags: base
